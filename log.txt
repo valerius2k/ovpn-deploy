@@ -1,0 +1,162 @@
+Reading package lists...
+Building dependency tree...
+Reading state information...
+curl is already the newest version (7.74.0-1.3+deb11u7).
+expect is already the newest version (5.45.4-2+b1).
+mc is already the newest version (3:4.8.26-1.1).
+nano is already the newest version (5.4-2+deb11u2).
+net-tools is already the newest version (1.60+git20181103.0eebece-1).
+psmisc is already the newest version (23.4-2).
+screen is already the newest version (4.8.0-6).
+wget is already the newest version (1.21-1+deb11u1).
+0 upgraded, 0 newly installed, 0 to remove and 0 not upgraded.
+spawn /bin/sh -c cd /root; ./openvpn-install.sh
+TERM environment variable not set.
+OpenVPN is already installed.
+
+Select an option:
+   1) Add a new client
+   2) Revoke an existing client
+   3) Remove OpenVPN
+   4) Exit
+Option: 3
+
+Confirm OpenVPN removal? [y/N]: y
+Removed /etc/systemd/system/multi-user.target.wants/openvpn-iptables.service.
+Removed /etc/systemd/system/multi-user.target.wants/openvpn-server@server.service.
+Reading package lists... 0%Reading package lists... 100%Reading package lists... Done
+Building dependency tree... 0%Building dependency tree... 0%Building dependency tree... 50%Building dependency tree... 50%Building dependency tree... Done
+Reading state information... 0% Reading state information... 1%Reading state information... Done
+The following packages were automatically installed and are no longer required:
+  liblzo2-2 libpkcs11-helper1
+Use 'apt autoremove' to remove them.
+The following packages will be REMOVED:
+  openvpn*
+0 upgraded, 0 newly installed, 1 to remove and 0 not upgraded.
+After this operation, 1,657 kB disk space will be freed.
+(Reading database ... (Reading database ... 5%(Reading database ... 10%(Reading database ... 15%(Reading database ... 20%(Reading database ... 25%(Reading database ... 30%(Reading database ... 35%(Reading database ... 40%(Reading database ... 45%(Reading database ... 50%(Reading database ... 55%(Reading database ... 60%(Reading database ... 65%(Reading database ... 70%(Reading database ... 75%(Reading database ... 80%(Reading database ... 85%(Reading database ... 90%(Reading database ... 95%(Reading database ... 100%(Reading database ... 20543 files and directories currently installed.)
+Removing openvpn (2.5.1-3) ...
+(Reading database ... (Reading database ... 5%(Reading database ... 10%(Reading database ... 15%(Reading database ... 20%(Reading database ... 25%(Reading database ... 30%(Reading database ... 35%(Reading database ... 40%(Reading database ... 45%(Reading database ... 50%(Reading database ... 55%(Reading database ... 60%(Reading database ... 65%(Reading database ... 70%(Reading database ... 75%(Reading database ... 80%(Reading database ... 85%(Reading database ... 90%(Reading database ... 95%(Reading database ... 100%(Reading database ... 20460 files and directories currently installed.)
+Purging configuration files for openvpn (2.5.1-3) ...
+debconf: unable to initialize frontend: Dialog
+debconf: (TERM is not set, so the dialog frontend is not usable.)
+debconf: falling back to frontend: Readline
+debconf: unable to initialize frontend: Readline
+debconf: (Can't locate Term/ReadLine.pm in @INC (you may need to install the Term::ReadLine module) (@INC contains: /etc/perl /usr/local/lib/x86_64-linux-gnu/perl/5.32.1 /usr/local/share/perl/5.32.1 /usr/lib/x86_64-linux-gnu/perl5/5.32 /usr/share/perl5 /usr/lib/x86_64-linux-gnu/perl-base /usr/lib/x86_64-linux-gnu/perl/5.32 /usr/share/perl/5.32 /usr/local/lib/site_perl) at /usr/share/perl5/Debconf/FrontEnd/Readline.pm line 7.)
+debconf: falling back to frontend: Teletype
+
+OpenVPN removed!
+spawn /bin/sh -c cd /root; ./openvpn-install.sh
+TERM environment variable not set.
+Welcome to this OpenVPN road warrior installer!
+
+Which IPv6 address should be used?
+     1) 2a10:1fc0:2::5728:f3b3
+     2) 2a10:1fc0:2::2741:3468
+     3) 2a10:1fc0:2::7dce:eb79
+     4) 2a10:1fc0:2::4272:10de
+IPv6 address [1]: 3
+
+Which protocol should OpenVPN use?
+   1) UDP (recommended)
+   2) TCP
+Protocol [1]: 2
+
+What port should OpenVPN listen to?
+Port [1194]: 443
+
+Select a DNS server for the clients:
+   1) Current system resolvers
+   2) Google
+   3) 1.1.1.1
+   4) OpenDNS
+   5) Quad9
+   6) AdGuard
+DNS server [1]: 5
+
+Enter a name for the first client:
+Name [client]: client
+
+OpenVPN installation is ready to begin.
+Press any key to continue...^J0% [Working]            Hit:1 http://security.debian.org/debian-security bullseye-security InRelease
+0% [Waiting for headers]                        Hit:2 http://deb.debian.org/debian bullseye InRelease
+0% [Waiting for headers]                        Hit:3 http://deb.debian.org/debian bullseye-updates InRelease
+                        0% [Working]0% [Working]0% [Working]20% [Working]             Reading package lists... 0%Reading package lists... 0%Reading package lists... 0%Reading package lists... 43%Reading package lists... 56%Reading package lists... 56%Reading package lists... 94%Reading package lists... 94%Reading package lists... 94%Reading package lists... 94%Reading package lists... 94%Reading package lists... 94%Reading package lists... 95%Reading package lists... 95%Reading package lists... 95%Reading package lists... 95%Reading package lists... 96%Reading package lists... 96%Reading package lists... 96%Reading package lists... 96%Reading package lists... 98%Reading package lists... 98%Reading package lists... 99%Reading package lists... 99%Reading package lists... 99%Reading package lists... 99%Reading package lists... 99%Reading package lists... 99%Reading package lists... Done
+Reading package lists... 0%Reading package lists... 100%Reading package lists... Done
+Building dependency tree... 0%Building dependency tree... 0%Building dependency tree... 50%Building dependency tree... 50%Building dependency tree... Done
+Reading state information... 0% Reading state information... 1%Reading state information... Done
+ca-certificates is already the newest version (20210119).
+openssl is already the newest version (1.1.1n-0+deb11u5).
+Suggested packages:
+  resolvconf openvpn-systemd-resolved
+Recommended packages:
+  easy-rsa
+The following NEW packages will be installed:
+  openvpn
+0 upgraded, 1 newly installed, 0 to remove and 0 not upgraded.
+Need to get 0 B/599 kB of archives.
+After this operation, 1,657 kB of additional disk space will be used.
+debconf: unable to initialize frontend: Dialog
+debconf: (TERM is not set, so the dialog frontend is not usable.)
+debconf: falling back to frontend: Readline
+debconf: unable to initialize frontend: Readline
+debconf: (Can't locate Term/ReadLine.pm in @INC (you may need to install the Term::ReadLine module) (@INC contains: /etc/perl /usr/local/lib/x86_64-linux-gnu/perl/5.32.1 /usr/local/share/perl/5.32.1 /usr/lib/x86_64-linux-gnu/perl5/5.32 /usr/share/perl5 /usr/lib/x86_64-linux-gnu/perl-base /usr/lib/x86_64-linux-gnu/perl/5.32 /usr/share/perl/5.32 /usr/local/lib/site_perl) at /usr/share/perl5/Debconf/FrontEnd/Readline.pm line 7, <> line 1.)
+debconf: falling back to frontend: Teletype
+Preconfiguring packages ...
+Selecting previously unselected package openvpn.
+(Reading database ... (Reading database ... 5%(Reading database ... 10%(Reading database ... 15%(Reading database ... 20%(Reading database ... 25%(Reading database ... 30%(Reading database ... 35%(Reading database ... 40%(Reading database ... 45%(Reading database ... 50%(Reading database ... 55%(Reading database ... 60%(Reading database ... 65%(Reading database ... 70%(Reading database ... 75%(Reading database ... 80%(Reading database ... 85%(Reading database ... 90%(Reading database ... 95%(Reading database ... 100%(Reading database ... 20455 files and directories currently installed.)
+Preparing to unpack .../openvpn_2.5.1-3_amd64.deb ...
+Unpacking openvpn (2.5.1-3) ...
+Setting up openvpn (2.5.1-3) ...
+debconf: unable to initialize frontend: Dialog
+debconf: (TERM is not set, so the dialog frontend is not usable.)
+debconf: falling back to frontend: Readline
+debconf: unable to initialize frontend: Readline
+debconf: (Can't locate Term/ReadLine.pm in @INC (you may need to install the Term::ReadLine module) (@INC contains: /etc/perl /usr/local/lib/x86_64-linux-gnu/perl/5.32.1 /usr/local/share/perl/5.32.1 /usr/lib/x86_64-linux-gnu/perl5/5.32 /usr/share/perl5 /usr/lib/x86_64-linux-gnu/perl-base /usr/lib/x86_64-linux-gnu/perl/5.32 /usr/share/perl/5.32 /usr/local/lib/site_perl) at /usr/share/perl5/Debconf/FrontEnd/Readline.pm line 7.)
+debconf: falling back to frontend: Teletype
+Created symlink /etc/systemd/system/multi-user.target.wants/openvpn.service → /lib/systemd/system/openvpn.service.
+....+++++
+...+++++
+Generating a RSA private key
+...........................+++++
+.........................................+++++
+writing new private key to '/etc/openvpn/easy-rsa/pki/3baf6650/temp.59ae7966'
+-----
+Using configuration from /etc/openvpn/easy-rsa/pki/3baf6650/temp.825c1fcc
+Check that the request matches the signature
+Signature ok
+The Subject's Distinguished Name is as followsclient
+
+commonName            :client
+ASN.1 12:'server'
+Certificate is to be certified until Jul  3 23:11:30 2033 GMT (3650 days)
+
+Write out database with 1 new entries
+Data Base Updated
+Generating a RSA private key
+.....+++++
+......+++++
+writing new private key to '/etc/openvpn/easy-rsa/pki/3788d0ea/temp.76421417'
+-----
+Using configuration from /etc/openvpn/easy-rsa/pki/3788d0ea/temp.bf2e6799
+Check that the request matches the signature
+Signature ok
+The Subject's Distinguished Name is as followsclient
+
+commonName            :client
+ASN.1 12:'client'
+Certificate is to be certified until Jul  3 23:11:30 2033 GMT (3650 days)
+
+Write out database with 1 new entries
+Data Base Updated
+Using configuration from /etc/openvpn/easy-rsa/pki/6b26a344/temp.fdaf79f6
+2023-07-06 23:11:30 WARNING: Using --genkey --secret filename is DEPRECATED.  Use --genkey secret filename instead.
+Created symlink /etc/systemd/system/multi-user.target.wants/openvpn-iptables.service → /etc/systemd/system/openvpn-iptables.service.
+Created symlink /etc/systemd/system/multi-user.target.wants/openvpn-server@server.service → /lib/systemd/system/openvpn-server@.service.
+Job for openvpn-server@server.service failed because the control process exited with error code.
+See "systemctl status openvpn-server@server.service" and "journalctl -xe" for details.
+
+Finished!
+
+The client configuration is available in: /root/client.ovpn
+New clients can be added by running this script again.

@@ -1,0 +1,38 @@
+map_hash_bucket_size 256;
+
+#OC ALPN
+map $ssl_preread_alpn_protocols $backend1 {
+    #~\bh2\b           web;
+    #~\bhttp/1.1\b     web;
+    default           ovpn;
+}
+
+map $ssl_preread_protocol $backend2 {
+    "TLSv1.3"        web;
+    "TLSv1.2"        web;
+    default          $backend1;
+}
+
+# SNI
+map $ssl_preread_server_name $backend {
+    {{ domain_web }}    web;
+    {{ domain_vpn }}   ovpn;
+    default           $backend2;
+}
+
+upstream ovpn {
+    server 127.0.0.1:{{ port_vpn }};
+}
+
+upstream web {
+    server 127.0.0.1:{{ port_web }};
+}
+
+server {
+    listen      [::]:443; # proxy_protocol;
+    listen      443; # proxy_protocol;
+    proxy_pass  $backend;
+    proxy_buffer_size 16k;
+    ssl_preread on;
+    # proxy_protocol on;
+}
