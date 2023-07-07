@@ -53,6 +53,11 @@ deploy() {
     pass=$1; shift
     port=$1; shift
 
+    domainweb=$1; shift
+    portweb=$1; shift
+    domainvpn=$1; shift
+    portvpn=$1; shift
+
     ovpnip=$1; shift
     ovpnip6=$1; shift
     ovpnport=$1; shift
@@ -70,11 +75,38 @@ deploy() {
     copyto $creds ovpn-inst.tcl "/root"
 
     # Install software
-    cmd="apt install mc nano screen net-tools psmisc wget curl expect -y"
+    cmd="apt install mc nano screen net-tools psmisc wget \
+         curl expect nginx ssl-cert certbot -y"
     execute $creds $cmd
 
     # Start OpenVPN installer
     execute $creds "/usr/bin/expect -f ovpn-inst.tcl $tclparms"
+
+    # Copy Nginx main config file
+    copyto $creds files/nginx/nginx.conf /etc/nginx
+
+    # Copy default Nginx config
+    cp files/nginx/sites-available/default.tmpl /tmp/default
+    sed -i /tmp/default -e "s/{{ port_web }}/$portweb/g"
+    copyto $creds /tmp/default /etc/nginx/sites-available
+
+    # Copy stream.conf
+    cp files/nginx/stream.conf.tmpl /tmp/stream.conf
+    sed -i /tmp/stream.conf \
+        -e "s/{{ domain_web }}/$domainweb/g" \
+        -e "s/{{ domain_vpn }}/$domainvpn/g" \
+        -e "s/{{ port_web }}/$portweb/g" \
+        -e "s/{{ port_vpn }}/$portvpn/g"
+    copyto $creds /tmp/stream.conf /etc/nginx
+
+    # Start make-ssl-cert
+    execute $creds "make-ssl-cert generate-default-snakeoil"
+
+    # Restart Nginx
+    execute $creds "systemctl restart nginx"
+
+    # Restart OpenVPN
+    execute $creds "systemctl restart openvpn"
 }
 
 cat $infile | grep -v '^#' | grep -v '^$' | sed -e "s/\s+#.*$//" | \

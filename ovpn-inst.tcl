@@ -12,7 +12,7 @@ set dns     [lindex $argv 4]
 
 if { $argc != 5 } {
     puts "You need to specify two arguments to this script:\n"
-    puts "<ip> <port> <protocol> <dns>"
+    puts "<ip> <ip6> <port> <protocol> <dns>"
     exit 1
 }
 

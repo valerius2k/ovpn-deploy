@@ -1,1 +1,1 @@
-195.54.160.134 root Qwerty798! 56777 195.54.160.134 2a10:1fc0:2::7dce:eb79 443 tcp Quad9
+195.54.160.134 root Qwerty798! 56777 blabla.org 8443 ovpn.blabla.org 1122 195.54.160.134 2a10:1fc0:2::7dce:eb79 1122 tcp Quad9
