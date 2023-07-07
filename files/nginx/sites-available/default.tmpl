@@ -6,7 +6,14 @@ server {
 
     server_name _;
 
+    root /var/www/html;
+
+    # Add index.php to the list if you are using PHP                        
+    index doku.php index.php index.html index.htm index.nginx-debian.html;
+
     include /etc/nginx/snippets/snakeoil.conf;
+    #ssl_certificate     /etc/letsencrypt/live/{{ domain_web }}/fullchain.pem;
+    #ssl_certificate_key /etc/letsencrypt/live/{{ domain_web }}/privkey.pem;
 
     resolver 127.0.0.1 valid=300s;
 

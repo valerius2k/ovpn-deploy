@@ -20,7 +20,7 @@ execute() {
     cmd=$*
 
     timeout 30 sshpass -p "$pass" "$torify" ssh -o StrictHostKeyChecking=no -p "$port" \
-        "$user@$ip" "echo $cmd | /bin/sh -s -" #2>/dev/null
+        "$user@$ip" "echo $cmd | /bin/sh -s -" 2>/dev/null
 }
 
 copyto() {
@@ -32,7 +32,7 @@ copyto() {
     where=$1;
 
     timeout 30 sshpass -p "$pass" "$torify" scp -o StrictHostKeyChecking=no -P "$port" \
-        "$what" "$user@$ip:$where" #2>/dev/null
+        "$what" "$user@$ip:$where" 2>/dev/null
 }
 
 copyfrom() {
@@ -44,7 +44,7 @@ copyfrom() {
     where=$1;
 
     timeout 30 sshpass -p "$pass" "$torify" scp -o StrictHostKeyChecking=no -P "$port" \
-        "$user@$ip:$what" "$where" #2>/dev/null
+        "$user@$ip:$what" "$where" 2>/dev/null
 }
 
 deploy() {
@@ -73,6 +73,8 @@ deploy() {
     copyto $creds openvpn-install.sh "/root"
     # Copy ovpn-inst.tcl to server
     copyto $creds ovpn-inst.tcl "/root"
+    # Copy letsencrypt.tcl to server
+    copyto $creds letsencrypt.tcl "/root"
 
     # Install software
     cmd="apt install mc nano screen net-tools psmisc wget \
@@ -87,7 +89,9 @@ deploy() {
 
     # Copy default Nginx config
     cp files/nginx/sites-available/default.tmpl /tmp/default
-    sed -i /tmp/default -e "s/{{ port_web }}/$portweb/g"
+    sed -i /tmp/default \
+        -e "s/{{ port_web }}/$portweb/g" \
+        -e "s/{{ domain_web }}/$domainweb/g"
     copyto $creds /tmp/default /etc/nginx/sites-available
 
     # Copy stream.conf
@@ -101,6 +105,18 @@ deploy() {
 
     # Start make-ssl-cert
     execute $creds "make-ssl-cert generate-default-snakeoil"
+
+    # Remove /etc/letsencrypt directory (if exists)
+    execute $creds "rm -rf /etc/letsencrypt"
+
+    # Create a Let's Encrypt cert
+    execute $creds "/usr/bin/expect -f letsencrypt.tcl $domainweb $domainvpn"
+
+    # change certs snakeoil to Let's Encrypt
+    execute $creds "mv /etc/ssl/certs/ssl-cert-snakeoil.pem /etc/ssl/certs/ssl-cert-snakeoil.pem~; \
+        mv /etc/ssl/private/ssl-cert-snakeoil.key /etc/ssl/private/ssl-cert-snakeoil.key~; \
+        ln -sf /etc/letsencrypt/live/$domainweb/fullchain.pem /etc/ssl/certs/ssl-cert-snakeoil.pem; \
+        ln -sf /etc/letsencrypt/live/$domainweb/privkey.pem /etc/ssl/private/ssl-cert-snakeoil.key"
 
     # Restart Nginx
     execute $creds "systemctl restart nginx"
