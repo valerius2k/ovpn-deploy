@@ -107,7 +107,7 @@ deploy() {
     execute $creds "make-ssl-cert generate-default-snakeoil"
 
     # Remove /etc/letsencrypt directory (if exists)
-    execute $creds "rm -rf /etc/letsencrypt"
+    #execute $creds "rm -rf /etc/letsencrypt"
 
     # Create a Let's Encrypt cert
     execute $creds "/usr/bin/expect -f letsencrypt.tcl $domainweb $domainvpn"
