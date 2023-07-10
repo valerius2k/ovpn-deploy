@@ -6,7 +6,7 @@ torify=proxychains
 # input file
 if [ "$1" = "-" ]; then
     # stdin
-    infile=&0
+    infile=
 else
     # servers.txt
     infile=servers.txt
