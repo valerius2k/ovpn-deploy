@@ -21,7 +21,7 @@ map $ssl_preread_server_name $backend {
 }
 
 upstream ovpn {
-    server 127.0.0.1:{{ port_vpn }};
+    server {{ ovpn_ip }}:{{ port_vpn }};
 }
 
 upstream web {

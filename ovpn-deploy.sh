@@ -193,7 +193,8 @@ deploy() {
         -e "s/{{ domain_web }}/$domainweb/g" \
         -e "s/{{ domain_vpn }}/$domainvpn/g" \
         -e "s/{{ port_web }}/$portweb/g" \
-        -e "s/{{ port_vpn }}/$portvpn/g"
+        -e "s/{{ port_vpn }}/$portvpn/g" \
+        -e "s/{{ ovpn_ip }}/$ovpnip/g"
     copyto $creds /tmp/stream.conf /etc/nginx
     rc="$?"
 
