@@ -135,7 +135,7 @@ deploy() {
     echo -n "Change IP of ovpn server to $domainvpn #1... "
     execute $creds "sed -i /etc/openvpn/client-common.txt \
         -e 's/[0-9]\\\{1,3\\\}\\\.[0-9]\\\{1,3\\\}\\\.[0-9]\\\{1,3\\\}\\\.[0-9]\\\{1,3\\\}/$domainvpn/' \
-        -e 's/$portvpn/$portweb/'"
+        -e 's/$ovpnport/443/'"
     rc="$?"
 
     if [ "$rc" -ne "0" ]; then
@@ -148,7 +148,7 @@ deploy() {
     echo -n "Change IP of ovpn server to $domainvpn #2... "
     execute $creds "sed -i /root/client.ovpn \
         -e 's/[0-9]\\\{1,3\\\}\\\.[0-9]\\\{1,3\\\}\\\.[0-9]\\\{1,3\\\}\\\.[0-9]\\\{1,3\\\}/$domainvpn/' \
-        -e 's/$portvpn/$portweb/'"
+        -e 's/$ovpnport/443/'"
     rc="$?"
 
     if [ "$rc" -ne "0" ]; then
