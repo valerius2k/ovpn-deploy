@@ -8,7 +8,7 @@ username="$1"
 # input file
 if [ "$2" = "-" ]; then
     # stdin
-    infile=&0
+    infile=
 else
     # servers.txt
     infile=servers.txt
