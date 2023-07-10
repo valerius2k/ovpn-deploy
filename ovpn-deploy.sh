@@ -133,7 +133,9 @@ deploy() {
 
     # Change IP of ovpn server to $domainvpn
     echo -n "Change IP of ovpn server to $domainvpn #1... "
-    execute $creds "sed -i /etc/openvpn/client-common.txt -e 's/[0-9]\\\{1,3\\\}\\\.[0-9]\\\{1,3\\\}\\\.[0-9]\\\{1,3\\\}\\\.[0-9]\\\{1,3\\\}/$domainvpn/'"
+    execute $creds "sed -i /etc/openvpn/client-common.txt \
+        -e 's/[0-9]\\\{1,3\\\}\\\.[0-9]\\\{1,3\\\}\\\.[0-9]\\\{1,3\\\}\\\.[0-9]\\\{1,3\\\}/$domainvpn/' \
+        -e 's/$portvpn/$portweb/'"
     rc="$?"
 
     if [ "$rc" -ne "0" ]; then
@@ -144,7 +146,9 @@ deploy() {
     fi
 
     echo -n "Change IP of ovpn server to $domainvpn #2... "
-    execute $creds "sed -i /root/client.ovpn -e 's/[0-9]\\\{1,3\\\}\\\.[0-9]\\\{1,3\\\}\\\.[0-9]\\\{1,3\\\}\\\.[0-9]\\\{1,3\\\}/$domainvpn/'"
+    execute $creds "sed -i /root/client.ovpn \
+        -e 's/[0-9]\\\{1,3\\\}\\\.[0-9]\\\{1,3\\\}\\\.[0-9]\\\{1,3\\\}\\\.[0-9]\\\{1,3\\\}/$domainvpn/' \
+        -e 's/$portvpn/$portweb/'"
     rc="$?"
 
     if [ "$rc" -ne "0" ]; then
@@ -296,6 +300,18 @@ deploy() {
     # Restart firewall rules
     echo -n "Restart firewall rules... "
     execute $creds "systemctl restart openvpn-iptables"
+    rc="$?"
+
+    if [ "$rc" -ne "0" ]; then
+        echo "rc=$rc"
+        exit 1
+    else
+        echo "ok"
+    fi
+
+    # Reboot
+    echo -n "Reboot... "
+    execute $creds "reboot"
     rc="$?"
 
     if [ "$rc" -ne "0" ]; then
