@@ -55,17 +55,6 @@ deploy() {
     pass=$1; shift
     port=$1; shift
 
-    domainweb=$1; shift
-    portweb=$1; shift
-    domainvpn=$1; shift
-    portvpn=$1; shift
-
-    ovpnip=$1; shift
-    ovpnip6=$1; shift
-    ovpnport=$1; shift
-    ovpnproto=$1; shift
-    ovpndns=$1; shift
-
     # Credentials for a VPS
     creds="$ip $user $pass $port"
     # Installer TCL script params (params for openvpn-install.sh)

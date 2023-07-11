@@ -55,17 +55,6 @@ deploy() {
     pass=$1; shift
     port=$1; shift
 
-    domainweb=$1; shift
-    portweb=$1; shift
-    domainvpn=$1; shift
-    portvpn=$1; shift
-
-    ovpnip=$1; shift
-    ovpnip6=$1; shift
-    ovpnport=$1; shift
-    ovpnproto=$1; shift
-    ovpndns=$1; shift
-
     # Credentials for a VPS
     creds="$ip $user $pass $port"
     # Installer TCL script params (params for openvpn-install.sh)
@@ -86,6 +75,19 @@ deploy() {
     # Start OpenVPN installer
     echo -n "Start OpenVPN installer... "
     execute $creds "/usr/bin/expect -f ovpn-rmuser.tcl $tclparms"
+    rc="$?"
+
+    if [ "$rc" -ne "0" ]; then
+        echo "rc=$rc"
+        exit 1
+    else
+        echo "ok"
+    fi
+
+    # Remove deleted config locally and remote
+    echo -n "Remove deleted config locally and remote... "
+    rm -rf "files/$username.ovpn"
+    execute $creds "rm -rf /root/$username.ovpn"
     rc="$?"
 
     if [ "$rc" -ne "0" ]; then
