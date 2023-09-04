@@ -20,7 +20,7 @@ while (1) {
             # удалить OpenVPN (потом переустановим снова)
             send "2\n"
         }
-        -re {     ([0-9]+)\) (.*)} {
+        -re { *([0-9]+)\) (.*)} {
             if { "$expect_out(2,string)" == "$username" } {
                     set usernum "$expect_out(1,string)"
             }
