@@ -32,7 +32,7 @@ while (1) {
                 send "y\n"
             }
             "  Confirm removal: " { send "yes\n" }
-            -re {     ([0-9]+)\) ([a-fA-F0-9:]+)} {
+            -re {(?n)^ *([0-9]+)\) ([a-fA-F0-9:]+)\r} {
                 if { "$expect_out(2,string)" == "$ip6addr" } {
                     set ip6 "$expect_out(1,string)"
                 }
@@ -40,7 +40,7 @@ while (1) {
             "IPv6 address \\\[" {
                 send "$ip6\n"
             }
-            -re {     ([0-9]+)\) ([0-9.]+)} {
+            -re {(?n)^ *([0-9]+)\) ([0-9.]+)\r} {
                 if { "$expect_out(2,string)" == "$ipaddr" } {
                     set ip "$expect_out(1,string)"
                 }
@@ -62,7 +62,7 @@ while (1) {
                 set port [lindex $argv 2]
                 send "$port\n"
             }
-            -re { *([0-9]+)\) ([a-zA-Z0-9.]+)} {
+            -re {(?n)^ *([0-9]+)\) ([a-zA-Z0-9.]+)\r} {
                 if { "$expect_out(2,string)" == "$dns" } {
                     set ip "$expect_out(1,string)"
                 }
