@@ -62,7 +62,7 @@ while (1) {
                 set port [lindex $argv 2]
                 send "$port\n"
             }
-            -re {   ([0-9]+)\) ([a-zA-Z0-9.]+)} {
+            -re { *([0-9]+)\) ([a-zA-Z0-9.]+)} {
                 if { "$expect_out(2,string)" == "$dns" } {
                     set ip "$expect_out(1,string)"
                 }
